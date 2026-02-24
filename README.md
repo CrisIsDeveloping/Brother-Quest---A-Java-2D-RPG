@@ -1,37 +1,61 @@
-🗡️ BROTHER QUEST 🗡️
-¡Bienvenido a Brother QUest! Este es un proyecto de RPG de acción en 2D creado puramente con Java.
+# 🗡️ Brother Quest - A Java 2D RPG
 
-Características actuales:
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![2D RPG](https://img.shields.io/badge/Game-2D_RPG-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Estado-En_Desarrollo-success?style=for-the-badge)
 
-⚔️ Combate fluido: Ataca, esquiva y lanza habilidades mágicas.
+¡Bienvenido a **Brother Quest**! Este es un proyecto de RPG de acción en 2D creado puramente con Java. Explora mapas, enfréntate a hordas de enemigos y sobrevive a combates épicos usando mecánicas avanzadas y un motor creado desde cero.
 
-👾 Variedad de enemigos: Desde clásicos slimes y hongos escurridizos, hasta esqueletos de élite con inteligencia artificial de persecución.
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/e938383b-6568-4d1c-b413-1345ed6f48ec" alt="Brother Quest preview" width="700">
+</p>
 
-👹 Batalla de Jefe: Enfréntate al temible NightBorne, y el futuro BOSS del mundo 1 Demonio Slime!.
+---
 
-🎨 Arte Pixelado: Animaciones cuadro por cuadro y gestión de cámara dinámica.
+## ✨ Características Actuales
 
-🎮 Cómo jugar (Controles básicos):
+* ⚔️ **Combate fluido:** Ataca, esquiva y lanza habilidades mágicas.
+* 👾 **Variedad de enemigos:** Desde clásicos slimes y hongos escurridizos, hasta esqueletos de élite con inteligencia artificial de persecución.
+* 👹 **Batalla de Jefes:** Enfréntate al temible NightBorne, ¡y prepárate para el futuro jefe del mundo 1, el Demonio Slime!
+* 🎨 **Arte Pixelado:** Animaciones cuadro por cuadro y gestión de cámara dinámica.
+* ⚙️ **Físicas y mecánicas:** Sistema de saltos con físicas y mecánicas de evasión al puro estilo *Dark Souls*.
 
-[W, A, S, D] - Moverse
+---
 
-[J] - Atacar
+## 🎮 Cómo Jugar (Jugadores)
 
-[K / Espacio] - Escudo / Saltar (Fisicas incluidas)
+¡No necesitas instalar Java ni compilar código! 
+1. Ve a la sección de **[Releases](../../releases)** (a la derecha de esta página).
+2. Descarga el archivo `.zip`.
+3. Descomprímelo en tu PC y haz doble clic en `Juego.exe`.
 
-[Q - E] - Cambiar Slot de Pociones
+### 🕹️ Controles
 
-[F] - Consumir pociones, objetos nuevos en un futuro!
+| Tecla | Acción |
+| :--- | :--- |
+| **W, A, S, D** | Moverse |
+| **J** | Atacar |
+| **K / Espacio** | Escudo / Saltar (Físicas incluidas) |
+| **R** | **Roll** (Rueda para esquivar con animación incluida) |
+| **Q - E** | Cambiar slot de pociones |
+| **F** | Consumir pociones |
+| **1, 2, 3** | Cargar barra de energía / Habilidades (Hab. 1 lista) |
+| **F2** | Skip Intro (¡Salta a la acción de una vez!) |
+| **F3** | Modo Desarrollador (Ver hitboxes y debug de IA) |
 
-[R] - ROLL, Rueda como lo harias en un juego estilo Dark Souls! Animacion incluida
+---
 
-[1 - 2 - 3] - Carga la barra de energia de tu caballero, para que desbloquee sus habilidades! (Habilidad 1, las demas en desarrollo)
+## 💻 Para Desarrolladores
 
-[F3] - MODO DESARROLLADOR, mira las hitbox, podras ver el DEBUG del jugador y los enemigos
+Si quieres ver el código fuente, aprender de él o colaborar:
+* **Requisito:** Java JDK 25.
+* Todo el renderizado y las físicas están programados de forma nativa utilizando `Graphics2D`. 
+* Clona el repositorio, abre el proyecto en tu IDE favorito (IntelliJ/Eclipse) y ejecuta la clase principal para empezar.
 
-[F2] - SKIP INTRO, salta a la acción de una vez!
+---
 
----> PREVIEW --->
-
-![Brother Quest preview](https://github.com/user-attachments/assets/e938383b-6568-4d1c-b413-1345ed6f48ec)
-
+## 🚀 Próximamente (Roadmap)
+- [ ] Menú in-game tipo "Libro Antiguo" para el tutorial de controles.
+- [ ] Nuevos objetos consumibles para el botón F.
+- [ ] Finalizar el desarrollo de las habilidades 2 y 3 del caballero.
+- [ ] Implementar la épica batalla contra el Demonio Slime.
