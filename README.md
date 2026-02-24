@@ -100,3 +100,5 @@ Para abrir, modificar o compilar el código fuente:
 - [ ] Crear mundo 2, mundo 3
 - [ ] Implementar sonidos, soundtracks
 - [ ] Ajustar dificultad, PVE justo
+- [ ] Agregar NPC, abre una tienda para comprar armaduras, espadas, pociones
+- [ ] Nuevas cinematicas, con lore del juego, al terminar mundo 1... etc
