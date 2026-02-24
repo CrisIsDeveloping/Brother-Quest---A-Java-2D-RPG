@@ -30,3 +30,8 @@ Características actuales:
 [F3] - MODO DESARROLLADOR, mira las hitbox, podras ver el DEBUG del jugador y los enemigos
 
 [F2] - SKIP INTRO, salta a la acción de una vez!
+
+---> PREVIEW --->
+
+![Brother Quest preview](https://github.com/user-attachments/assets/e938383b-6568-4d1c-b413-1345ed6f48ec)
+
