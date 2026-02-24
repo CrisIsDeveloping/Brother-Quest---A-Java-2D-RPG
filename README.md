@@ -55,7 +55,10 @@ Si quieres ver el código fuente, aprender de él o colaborar:
 ---
 
 ## 🚀 Próximamente (Roadmap)
-- [ ] Menú in-game tipo "Libro Antiguo" para el tutorial de controles.
+- [ ] Menú in-game para el tutorial de controles.
 - [ ] Nuevos objetos consumibles para el botón F.
 - [ ] Finalizar el desarrollo de las habilidades 2 y 3 del caballero.
 - [ ] Implementar la épica batalla contra el Demonio Slime.
+- [ ] Crear mundo 2, mundo 3
+- [ ] Implementar sonidos, soundtracks
+- [ ] Ajustar dificultad, PVE justo
