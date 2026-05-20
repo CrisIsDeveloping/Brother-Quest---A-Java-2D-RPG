@@ -7,9 +7,6 @@ import java.awt.image.BufferedImage;
 
 public class EnemigoJefeDemonio extends EnemigoBase {
 
-    
-    
-    
     public static final int IDLE = 0;
     public static final int WALK = 1;
     public static final int CLEAVE = 2;
@@ -18,54 +15,49 @@ public class EnemigoJefeDemonio extends EnemigoBase {
 
     private static final int[] FRAME_COUNT = { 6, 12, 15, 5, 22 };
 
-    
     private boolean activo = false;
     private int cooldownAtaque = 0;
     private static final int TIEMPO_ENTRE_GOLPES = 45;
-    
+
     private int cooldownCuerpo = 0;
     private static final int TIEMPO_ENTRE_GOLPES_CUERPO = 45;
 
-    
-    
     private int cooldownTakeHit = 0;
     private static final int TIEMPO_ENTRE_TAKE_HIT = 240;
 
     private boolean golpeRegistradoBoss = false;
 
-    
-    private static final int RANGO_VISION = 1000; 
-    private static final int RANGO_PARAR = 150; 
-    private static final int RANGO_ATAQUE_X = 150; 
-    private static final int RANGO_ATAQUE_Y = 80; 
+    private static final int RANGO_VISION = 1000;
+    private static final int RANGO_PARAR = 150;
+    private static final int RANGO_ATAQUE_X = 150;
+    private static final int RANGO_ATAQUE_Y = 80;
     private static final float VELOCIDAD = 1.8f;
 
-    
-    private static final int DRAW_W = 576; 
-    private static final int DRAW_H = 320; 
-    
-    
+    private static final int DRAW_W = 576;
+    private static final int DRAW_H = 320;
+
     private static final int HBOX_OFFSET_X = 15;
 
-    
     public EnemigoJefeDemonio(int x, int y) {
         super(x, y);
         this.vidaMax = 2500;
         this.vida = 2500;
-        this.dano = 44; 
-        
+        this.dano = 44;
+
         this.hitbox = new CajaColision(x + HBOX_OFFSET_X, y, 100, 220);
         this.estadoActual = IDLE;
         this.aniSpeed = 6;
-        
+
         this.mirandoIzquierda = true;
-        this.sombraAncho = 0;
+        this.sombraAncho = 150; // width of shadow (hitbox width 100 + 30)
+        this.sombraAlto = 50; // increased height by 30 (default 20)
+        this.sombraOffsetX = -25; // center shadow horizontally under hitbox
+        this.sombraOffsetY = -30; // raise shadow by 20px (default -10)
     }
 
     private boolean enFase2 = false;
     private int tiempoMuerto = 0;
 
-    
     public void setActivo(boolean a) {
         this.activo = a;
     }
@@ -82,7 +74,6 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         this.golpeRegistradoBoss = b;
     }
 
-    
     @Override
     public void actualizarIA(Jugador jugador) {
         if (!activo)
@@ -104,7 +95,7 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         }
 
         if (estadoActual == CLEAVE)
-            return; 
+            return;
 
         if (cooldownAtaque > 0)
             cooldownAtaque--;
@@ -112,13 +103,11 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         boolean fase2 = this.vida <= (this.vidaMax / 2);
         float velActual = fase2 ? VELOCIDAD * 2.0f : VELOCIDAD;
 
-        
         double piesEnemY = hitbox.y + hitbox.height;
         double piesJugY = jugador.getBounds().y + jugador.getBounds().height;
 
         double distY = Math.abs(piesJugY - piesEnemY);
 
-        
         if (distX <= RANGO_ATAQUE_X && distY <= RANGO_ATAQUE_Y && cooldownAtaque <= 0) {
             estadoActual = CLEAVE;
             aniIndex = 0;
@@ -126,7 +115,6 @@ public class EnemigoJefeDemonio extends EnemigoBase {
             golpeRegistradoBoss = false;
             GestorSonidos.reproducir(GestorSonidos.BOSS_ATTACK);
 
-            
             if (Math.random() < 0.35) {
                 isDelayedAttack = true;
                 delayTimer = 40 + (int) (Math.random() * 50);
@@ -135,10 +123,9 @@ public class EnemigoJefeDemonio extends EnemigoBase {
                 isDelayedAttack = false;
             }
 
-            
         } else if (distX <= RANGO_PARAR) {
             estadoActual = IDLE;
-            
+
             if (distY > RANGO_ATAQUE_Y) {
                 if (piesJugY < piesEnemY)
                     this.y -= velActual * 0.4;
@@ -147,17 +134,16 @@ public class EnemigoJefeDemonio extends EnemigoBase {
                 hitbox.actualizar((int) x + HBOX_OFFSET_X, (int) y);
             }
 
-            
         } else if (distX < RANGO_VISION) {
             estadoActual = WALK;
-            
+
             if (distX > RANGO_PARAR) {
                 if (centroJugX < centroEneX)
                     this.x -= velActual;
                 else
                     this.x += velActual;
             }
-            
+
             if (distY > RANGO_ATAQUE_Y) {
                 if (piesJugY < piesEnemY)
                     this.y -= velActual * 0.6;
@@ -171,22 +157,19 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         }
     }
 
-    
     @Override
     public void actualizar() {
-        
+
         actualizarInvulnerabilidad();
         if (cooldownTakeHit > 0)
             cooldownTakeHit--;
         if (cooldownCuerpo > 0)
             cooldownCuerpo--;
 
-        
         if (estadoActual != CLEAVE || aniIndex < 9 || aniIndex > 11) {
             golpeRegistradoBoss = false;
         }
 
-        
         if (estadoActual == CLEAVE && aniIndex == 8 && isDelayedAttack && delayTimer > 0) {
             if (delayTimer == initialDelay) {
                 GestorSonidos.reproducir(GestorSonidos.CARGA_ATAQUE);
@@ -197,8 +180,10 @@ public class EnemigoJefeDemonio extends EnemigoBase {
 
         aniTick++;
         int vel = aniSpeed;
-        if (estadoActual == IDLE) vel = 7;
-        else if (estadoActual == DEATH) vel = 5;
+        if (estadoActual == IDLE)
+            vel = 7;
+        else if (estadoActual == DEATH)
+            vel = 5;
 
         if (aniTick >= vel) {
             aniTick = 0;
@@ -229,18 +214,16 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         hitbox.actualizar((int) x + HBOX_OFFSET_X, (int) y);
     }
 
-    
     @Override
     public void dibujarHUD(Graphics2D g2, int cameraX) {
-        
+
     }
 
     @Override
     public void recibirDano(int cantidad) {
         if (muerto)
             return;
-        
-        
+
         if (tiempoInvulnerable > 0)
             return;
         tiempoInvulnerable = 8;
@@ -262,21 +245,15 @@ public class EnemigoJefeDemonio extends EnemigoBase {
             GestorSonidos.reproducir(GestorSonidos.BOSS_ANGRY);
         }
 
-        
-        
-        
         if (cooldownTakeHit <= 0 && estadoActual != CLEAVE) {
             estadoActual = TAKE_HIT;
             aniIndex = 0;
             aniTick = 0;
-            cooldownTakeHit = TIEMPO_ENTRE_TAKE_HIT; 
+            cooldownTakeHit = TIEMPO_ENTRE_TAKE_HIT;
         }
-        
-        
+
     }
 
-    
-    
     @Override
     public Rectangle getAttackBox() {
         if (estadoActual == CLEAVE && aniIndex >= 9 && aniIndex <= 11) {
@@ -296,7 +273,7 @@ public class EnemigoJefeDemonio extends EnemigoBase {
     @Override
     public boolean puedeAtacar() {
         return estadoActual != DEATH && estadoActual != TAKE_HIT;
-    } 
+    }
 
     public boolean puedeHacerDanoCuerpo() {
         return cooldownCuerpo <= 0 && estadoActual != DEATH && estadoActual != TAKE_HIT;
@@ -313,7 +290,7 @@ public class EnemigoJefeDemonio extends EnemigoBase {
 
     @Override
     public boolean isAnimacionMuerteTerminada() {
-        return muerto && estadoActual == DEATH && aniIndex >= FRAME_COUNT[DEATH] - 1 && tiempoMuerto > 60; 
+        return muerto && estadoActual == DEATH && aniIndex >= FRAME_COUNT[DEATH] - 1 && tiempoMuerto > 60;
     }
 
     @Override
@@ -328,7 +305,6 @@ public class EnemigoJefeDemonio extends EnemigoBase {
     public void actualizarMarchaCinematica() {
     }
 
-    
     @Override
     public void dibujar(Graphics2D g, int cameraX) {
         if (GestorRecursos.animacionesDemon == null)
@@ -343,19 +319,15 @@ public class EnemigoJefeDemonio extends EnemigoBase {
                 ? anim[estado][idx]
                 : null;
 
-        
         if (estadoActual == DEATH && idx >= frames - 1) {
             img = null;
         }
 
         if (img != null) {
-            
+
             int renderX = hitbox.x - cameraX - (DRAW_W / 2) + (hitbox.width / 2);
             int renderY = hitbox.y - (DRAW_H - hitbox.height);
 
-            
-            
-            
             if (mirandoIzquierda) {
                 g.drawImage(img, renderX, renderY, DRAW_W, DRAW_H, null);
             } else {
@@ -367,10 +339,10 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         }
 
         if (GamePanel.debugActivado) {
-            
+
             g.setColor(Color.RED);
             g.drawRect(hitbox.x - cameraX, hitbox.y, hitbox.width, hitbox.height);
-            
+
             Rectangle atk = getAttackBox();
             if (atk != null) {
                 g.setColor(Color.YELLOW);
