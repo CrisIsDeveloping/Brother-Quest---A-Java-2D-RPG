@@ -54,7 +54,23 @@ public class Colisiones {
             }
         }
 
-        // 2) Enemigos tipo "cuerpo a cuerpo" sin arma box (slime)
+        // 2) Enemigos tipo "cuerpo a cuerpo" sin arma box (slime) y colisión corporal del Boss
+        if (e instanceof EnemigoJefeDemonio) {
+            EnemigoJefeDemonio jefe = (EnemigoJefeDemonio) e;
+            if (jugador.getBounds().intersects(e.getBounds())) {
+                if (jugador.isRodando()) {
+                    if (!jugador.isEsquivadoBossEsteRoll()) {
+                        jugador.setEsquivadoBossEsteRoll(true);
+                        textosDano.add(new TextoDano(jugador.getX(), jugador.getY() - 20, "ESQUIVADO", Color.YELLOW));
+                    }
+                } else if (jefe.puedeHacerDanoCuerpo()) {
+                    procesarDanoAJugador(jugador, e, textosDano);
+                    jefe.reiniciarCooldownCuerpo();
+                }
+            }
+            return;
+        }
+
         if (jugador.getBounds().intersects(e.getBounds()) && e.puedeAtacar()) {
             boolean esquivado = (jugador.getZ() > 30);
             if (!esquivado) {

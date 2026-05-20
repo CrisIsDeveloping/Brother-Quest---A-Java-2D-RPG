@@ -80,6 +80,10 @@ public class Jugador extends Entidad {
     private boolean invencible = false;
 
     public java.util.Set<EnemigoBase> enemigosGolpeados = new java.util.HashSet<>();
+    private boolean esquivadoBossEsteRoll = false;
+
+    public void setEsquivadoBossEsteRoll(boolean b) { this.esquivadoBossEsteRoll = b; }
+    public boolean isEsquivadoBossEsteRoll() { return esquivadoBossEsteRoll; }
 
     public enum Estado {
         VIVO, MUERTO
@@ -190,6 +194,7 @@ public class Jugador extends Entidad {
         if (!rodando && !enAire && stamina >= COSTO_STAMINA_ROLL && estado == Estado.VIVO) {
             stamina -= COSTO_STAMINA_ROLL;
             rodando = true;
+            esquivadoBossEsteRoll = false;
             GestorSonidos.reproducir(GestorSonidos.RODAR);
             aniIndex = 0;
             aniTick = 0;

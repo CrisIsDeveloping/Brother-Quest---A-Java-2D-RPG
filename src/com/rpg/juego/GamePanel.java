@@ -49,6 +49,7 @@ public class GamePanel extends JPanel {
     public static final int ESTADO_VICTORIA = 11;
 
     public int estadoActual = ESTADO_MENU;
+    public int estadoPrePausa = ESTADO_JUEGO;
     private List<Trader> traders;
     public Trader traderActivo = null;
 
@@ -488,7 +489,7 @@ public class GamePanel extends JPanel {
         if (subEstadoPausa == 0) {
             switch (seleccionPausa) {
                 case 0:
-                    estadoActual = ESTADO_JUEGO;
+                    estadoActual = estadoPrePausa;
                     break;
                 case 1:
                     subEstadoPausa = 1;
@@ -649,8 +650,9 @@ public class GamePanel extends JPanel {
     public void accionEscape() {
         if (consolaAbierta) {
             consolaAbierta = false;
-        } else if (estadoActual == ESTADO_JUEGO) {
+        } else if (estadoActual == ESTADO_JUEGO || estadoActual == ESTADO_BOSS_FIGHT) {
             GestorSonidos.reproducir(GestorSonidos.MENU_OPEN);
+            estadoPrePausa = estadoActual;
             estadoActual = ESTADO_PAUSA;
             subEstadoPausa = 0;
             pararMovimientoJugador();
@@ -659,7 +661,7 @@ public class GamePanel extends JPanel {
                 subEstadoPausa = 0;
                 seleccionPausa = 1;
             } else {
-                estadoActual = ESTADO_JUEGO;
+                estadoActual = estadoPrePausa;
             }
         } else if (estadoActual == ESTADO_TIENDA) {
             estadoActual = ESTADO_JUEGO;

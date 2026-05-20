@@ -22,6 +22,9 @@ public class EnemigoJefeDemonio extends EnemigoBase {
     private boolean activo = false;
     private int cooldownAtaque = 0;
     private static final int TIEMPO_ENTRE_GOLPES = 45;
+    
+    private int cooldownCuerpo = 0;
+    private static final int TIEMPO_ENTRE_GOLPES_CUERPO = 45;
 
     
     
@@ -175,6 +178,8 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         actualizarInvulnerabilidad();
         if (cooldownTakeHit > 0)
             cooldownTakeHit--;
+        if (cooldownCuerpo > 0)
+            cooldownCuerpo--;
 
         
         if (estadoActual != CLEAVE || aniIndex < 9 || aniIndex > 11) {
@@ -293,9 +298,17 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         return estadoActual != DEATH && estadoActual != TAKE_HIT;
     } 
 
+    public boolean puedeHacerDanoCuerpo() {
+        return cooldownCuerpo <= 0 && estadoActual != DEATH && estadoActual != TAKE_HIT;
+    }
+
     @Override
     public void reiniciarCooldown() {
         cooldownAtaque = TIEMPO_ENTRE_GOLPES;
+    }
+
+    public void reiniciarCooldownCuerpo() {
+        cooldownCuerpo = TIEMPO_ENTRE_GOLPES_CUERPO;
     }
 
     @Override
