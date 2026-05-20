@@ -1,16 +1,12 @@
-<div align="center">
-  <h1>🗡️ Brother Quest - A Java 2D RPG</h1>
+# 🗡️ Brother Quest - A Java 2D RPG
 
-  <img src="https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white" alt="Java" />
-  <img src="https://img.shields.io/badge/Game-2D_RPG-blue?style=for-the-badge" alt="2D RPG" />
-  <img src="https://img.shields.io/badge/Estado-En_Desarrollo-success?style=for-the-badge" alt="Status" />
-</div>
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
+![2D RPG](https://img.shields.io/badge/Game-2D_RPG-blue?style=for-the-badge)
+![Status](https://img.shields.io/badge/Estado-En_Desarrollo-success?style=for-the-badge)
 
 ¡Bienvenido a **Brother Quest**! Un RPG de acción en 2D desarrollado puramente con Java. Explora mapas, enfréntate a hordas de enemigos y sobrevive a combates épicos usando mecánicas avanzadas, habilidades mágicas y un motor construido completamente desde cero, ahora con una arquitectura robusta y modular.
 
-<p align="center">
-  <img src="https://github.com/user-attachments/assets/e938383b-6568-4d1c-b413-1345ed6f48ec" alt="Brother Quest preview" width="700" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
-</p>
+<img src="https://github.com/user-attachments/assets/e938383b-6568-4d1c-b413-1345ed6f48ec" alt="Brother Quest preview" width="700" style="border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.3);">
 
 ---
 
@@ -33,8 +29,8 @@ Los controles han sido mapeados meticulosamente mediante un sistema de `InputBin
 
 ### Movimiento y Combate Básico
 | Tecla | Acción |
-| :---: | :--- |
-| **A / D** o **Flechas ⬅️ ➡️** | Moverse a la izquierda / derecha |
+| :--- | :--- |
+| **W, A, S, D** o **Flechas** | Moverse (Arriba, Abajo, Izquierda, Derecha) |
 | **Espacio** | Saltar (Con motor de físicas integrado) |
 | **J** | Atacar con el arma principal |
 | **R** | Rodar / Esquivar (*Roll*) |
@@ -43,14 +39,14 @@ Los controles han sido mapeados meticulosamente mediante un sistema de `InputBin
 
 ### Interacción y Consumibles
 | Tecla | Acción |
-| :---: | :--- |
+| :--- | :--- |
 | **G** | Interactuar (Hablar con el mercader, recoger ítems) |
 | **Q / E** | Cambiar entre las pociones disponibles |
 | **F** | Consumir la poción seleccionada |
 
 ### Navegación de Menús y Sistema
 | Tecla | Acción |
-| :---: | :--- |
+| :--- | :--- |
 | **W / S** o **Flechas ⬆️ ⬇️** | Navegar por las opciones de los menús |
 | **Enter** | Aceptar / Confirmar acción |
 | **Escape (ESC)** | Pausar el juego / Volver al menú anterior |
@@ -117,10 +113,9 @@ Para escalar el proyecto y mantener un código limpio (cumpliendo con el Princip
 
 ## 🚀 Próximamente (Roadmap)
 
-- [ ] Menú in-game para el tutorial de controles.
+- [x] Menú in-game para el tutorial de controles.
+- [x] Implementar la épica batalla contra el Demonio Slime.
 - [ ] Ampliar el inventario de objetos consumibles para el botón F.
-- [ ] Finalizar el desarrollo de las habilidades 2 y 3 del caballero.
-- [ ] Implementar la épica batalla contra el Demonio Slime.
 - [ ] Crear el Mundo 2 y Mundo 3.
-- [ ] Añadir NPC interactivos y expandir el sistema de tiendas.
+- [ ] Añadir más NPC interactivos y expandir el sistema de tiendas.
 - [ ] Nuevas cinemáticas con *lore* del juego al terminar el primer mundo.
