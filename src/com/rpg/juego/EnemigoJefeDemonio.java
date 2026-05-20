@@ -94,7 +94,8 @@ public class EnemigoJefeDemonio extends EnemigoBase {
         if (distX > 20) {
             if (estadoActual != CLEAVE) {
                 mirandoIzquierda = (centroJugX < centroEneX);
-            } else if (aniIndex <= 9) {
+            } else if (aniIndex <= 11) {
+                // Permite girar hacia el jugador hasta el último frame activo del ataque
                 mirandoIzquierda = (centroJugX < centroEneX);
             }
         }
@@ -274,12 +275,13 @@ public class EnemigoJefeDemonio extends EnemigoBase {
     @Override
     public Rectangle getAttackBox() {
         if (estadoActual == CLEAVE && aniIndex >= 9 && aniIndex <= 11) {
-            
             int anchoAtk = 250;
             int altoAtk = 180;
+            // Desplazamos 60px hacia el centro del jefe para que golpee
+            // a jugadores parados en sus pies (antes quedaban fuera del área)
             int atkX = mirandoIzquierda
-                    ? hitbox.x - anchoAtk 
-                    : hitbox.x + hitbox.width; 
+                    ? hitbox.x - anchoAtk + 60
+                    : hitbox.x + hitbox.width - 60;
             int atkY = hitbox.y + 10;
             return new Rectangle(atkX, atkY, anchoAtk, altoAtk);
         }

@@ -53,7 +53,7 @@ public class GestorContadores {
         pts += danioInfligido     / 5;
         pts += bloqueosExitosos   * 250;
         pts += monedasGanadas     *  5;
-        pts -= danioRecibido      *  5;
+        pts -= danioRecibido;
         return Math.max(0, pts);
     }
 }

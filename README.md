@@ -10,48 +10,49 @@
 
 ---
 
-## ✨ Características y Novedades
+## ✨ Características Actuales
 
-El proyecto ha crecido enormemente, integrando nuevas mecánicas, entidades y una reorganización total del código base:
+El proyecto integra mecánicas robustas, entidades dinámicas y una arquitectura modular organizada:
 
 * ⚔️ **Combate fluido y responsivo:** Sistema de ataque, mecánicas de guardia/escudo, evasión (roll) con i-frames y habilidades mágicas únicas.
-* 👾 **Bestiario expandido:** Enfréntate a Slimes, Hongos (`EnemigoMushroom`), Esqueletos básicos y de Élite con IA de persecución, y los imponentes jefes NightBorne y Jefe Demonio (`EnemigoJefeDemonio`).
-* 📜 **Consola de Comandos (Nueva):** Integrada para depuración y trucos en tiempo real durante el juego.
-* 💰 **Sistema de Comercio e Inventario:** Nuevo NPC Mercader (`Trader.java`), recolección de objetos (`ObjetoRecogible.java`) y gestión de pociones.
-* 🎨 **Feedback visual y sonoro:** Textos de daño flotantes (`TextoDano.java`), barra de vida dinámica para jefes (`BarraJefe.java`) y un sistema de audio envolvente.
-* 🌍 **Entornos dinámicos:** Implementación de portales (`Portal.java`) para el cambio fluido entre niveles, capas de fondo en parallax (`CapaFondo.java`), y generadores automáticos de enemigos (`Spawner.java`).
+* 👾 **Bestiario y Jefes:** Enfréntate a Slimes, Hongos (`EnemigoMushroom`), Esqueletos básicos y de Élite con IA de persecución. Incluye la batalla épica completamente funcional contra el jefe del Mundo 1: el **Demonio Slime** (`EnemigoJefeDemonio`), y el temible **NightBorne** (`EnemigoNightBorne`).
+* 🕹️ **Tutorial Integrado:** Menú interactivo dentro del juego para consultar los controles en cualquier momento de la partida.
+* 📜 **Consola de Comandos:** Consola integrada para depuración y trucos en tiempo real durante el juego (`GestorComandos.java`).
+* 💰 **Sistema de Comercio e Inventario:** NPC Mercader funcional (`Trader.java`), recolección de objetos en el suelo (`ObjetoRecogible.java`) y consumo de pociones.
+* 🎨 **Feedback Visual y Sonoro:** Textos de daño flotantes (`TextoDano.java`), barra de vida para jefes (`BarraJefe.java`) y efectos de sonido dinámicos gestionados por código.
+* 🌍 **Entornos Dinámicos:** Portales funcionales (`Portal.java`) para el cambio de niveles, fondos multicapa con efecto parallax (`CapaFondo.java`), y generadores de enemigos (`Spawner.java`).
 
 ---
 
 ## 🕹️ Controles del Juego
 
-Los controles han sido mapeados meticulosamente mediante un sistema de `InputBindings` para garantizar una respuesta precisa en cualquier estado del juego:
+Los controles están mapeados mediante un sistema de `InputBindings` para garantizar una respuesta precisa en cualquier pantalla del juego:
 
 ### Movimiento y Combate Básico
 | Tecla | Acción |
 | :--- | :--- |
 | **W, A, S, D** o **Flechas** | Moverse (Arriba, Abajo, Izquierda, Derecha) |
-| **Espacio** | Saltar (Con motor de físicas integrado) |
+| **Espacio** | Saltar (Con físicas de gravedad y salto integradas) |
 | **J** | Atacar con el arma principal |
 | **R** | Rodar / Esquivar (*Roll*) |
-| **K** (Mantener) | Guardia / Bloquear ataques |
+| **K** (Mantener) | Guardia / Bloquear ataques entrantes |
 | **H** | Lanzar Habilidad Mágica Única |
 
 ### Interacción y Consumibles
 | Tecla | Acción |
 | :--- | :--- |
-| **G** | Interactuar (Hablar con el mercader, recoger ítems) |
-| **Q / E** | Cambiar entre las pociones disponibles |
+| **G** | Interactuar (Hablar con el mercader, cruzar portales, recoger ítems) |
+| **Q / E** | Cambiar entre las pociones del inventario |
 | **F** | Consumir la poción seleccionada |
 
 ### Navegación de Menús y Sistema
 | Tecla | Acción |
 | :--- | :--- |
 | **W / S** o **Flechas ⬆️ ⬇️** | Navegar por las opciones de los menús |
-| **Enter** | Aceptar / Confirmar acción |
+| **Enter** | Aceptar / Confirmar opción seleccionada |
 | **Escape (ESC)** | Pausar el juego / Volver al menú anterior |
-| **F2** | Omitir Intro (Saltar directo a la acción) |
-| **F3** | Modo Debug (Ver hitboxes de colisión y datos de IA) |
+| **F2** | Omitir Intro (Saltar directamente a la acción) |
+| **F3** | Modo Debug (Muestra hitboxes de colisión y datos de IA en tiempo real) |
 | **F4** | Abrir/Cerrar la Consola de Comandos |
 | **F11** | Alternar Modo Pantalla Completa |
 
@@ -59,13 +60,13 @@ Los controles han sido mapeados meticulosamente mediante un sistema de `InputBin
 
 ## 🧠 Arquitectura y Separación de Lógica (Refactorización OOP)
 
-Para escalar el proyecto y mantener un código limpio (cumpliendo con el Principio de Responsabilidad Única), la lógica que antes saturaba la clase principal se ha modularizado en diversos **Gestores** y **Componentes**:
+Para escalar el proyecto y mantener un código limpio (cumpliendo con el Principio de Responsabilidad Única), la lógica se ha modularizado en diversos **Gestores** y **Componentes**:
 
 * 🛠️ **Gestores Especializados (Managers):**
   * **`GestorTeclas.java`**: Aísla por completo el registro y manejo de eventos de teclado (InputMap/ActionMap), independizándolo de la UI.
   * **`GestorComandos.java`**: Procesa e interpreta las instrucciones introducidas en la consola de desarrollador.
   * **`GestorHabilidades.java`**: Controla el enfriamiento (*cooldown*), coste y ejecución de las magias de los personajes.
-  * **`GestorSonidos.java`** y **`GestorRecursos.java`**: Se encargan de la carga en memoria y reproducción eficiente de todos los *assets* (audio, sprites, tiles).
+  * **`GestorSonidos.java`** y **`GestorRecursos.java`**: Carga en memoria y reproducción eficiente de todos los *assets* (audio, sprites, tiles).
   * **`GestorContadores.java`**: Administra los temporizadores y eventos basados en tiempo de forma centralizada.
 
 * ⚙️ **Motores Independientes:**
@@ -74,7 +75,7 @@ Para escalar el proyecto y mantener un código limpio (cumpliendo con el Princip
 
 * 🧬 **Jerarquía de Entidades:**
   * Todas las criaturas dinámicas, incluyendo al jugador (`Jugador.java`), heredan de **`Entidad.java`**, compartiendo un núcleo común de propiedades físicas, estados y animaciones.
-  * Los enemigos derivan de **`EnemigoBase.java`**, que estandariza la Inteligencia Artificial básica, la detección del jugador y las rutinas de patrullaje, facilitando la creación de nuevas variaciones de enemigos como el `EnemigoEsqueletoElite` de forma limpia y orientada a objetos.
+  * Los enemigos derivan de **`EnemigoBase.java`**, que estandariza la Inteligencia Artificial básica, la detección del jugador y las rutinas de patrullaje, facilitando la creación de nuevas variaciones de enemigos de forma limpia y orientada a objetos.
 
 ---
 
@@ -113,9 +114,8 @@ Para escalar el proyecto y mantener un código limpio (cumpliendo con el Princip
 
 ## 🚀 Próximamente (Roadmap)
 
-- [x] Menú in-game para el tutorial de controles.
-- [x] Implementar la épica batalla contra el Demonio Slime.
-- [ ] Ampliar el inventario de objetos consumibles para el botón F.
 - [ ] Crear el Mundo 2 y Mundo 3.
 - [ ] Añadir más NPC interactivos y expandir el sistema de tiendas.
 - [ ] Nuevas cinemáticas con *lore* del juego al terminar el primer mundo.
+- [ ] Ampliar el inventario de objetos consumibles para el botón F.
+- [ ] Ajustar la dificultad y equilibrar el balance del PVE para una experiencia justa.

@@ -178,6 +178,7 @@ public class Colisiones {
                 for (EnemigoBase e : enemigos) {
                     if (!e.isMuerto() && !e.isSpawning() && p.getHitbox().intersects(e.getBounds()) && !p.enemigosGolpeados.contains(e)) {
                         e.recibirDano(p.getDano());
+                        GestorContadores.get().registrarDanioInfligido(p.getDano()); // Daño infligido por magia
                         textosDano.add(new TextoDano(e.getX(), e.getY() - 20, p.getDano(), Color.CYAN));
                         p.enemigosGolpeados.add(e);
                         
